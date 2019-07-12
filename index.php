@@ -1,5 +1,6 @@
 <?php
   require_once('inc/livres.php');
+  require_once('fonctions.php');
 ?>
 
 <!DOCTYPE html>

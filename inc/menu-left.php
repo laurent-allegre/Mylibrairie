@@ -7,10 +7,9 @@
         <div class="list-group">
  
         <?php
-          for ($i=0; $i <3 ; $i++) { 
-            echo ' <a href="item.php?idlivre='.$i.' " class="list-group-item">'.$livres[$i]["titre"].'</a>';
-          }
-        
+         require_once('fonctions.php');
+          menuTop3($livres);
+
         ?>
         </div>
 
