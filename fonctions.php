@@ -1,4 +1,4 @@
-<h1>Fonctions</h1>
+
 <?php
 
 

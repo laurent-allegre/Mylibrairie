@@ -1,11 +1,14 @@
 <?php
 $users = [
     ['email' => 'monadresse@com',
-        'password' => 'titi'],
+        'password' => 'titi',
+        'prenom'=> 'aldo'],
 
     ['email' => 'lolo@com',
-        'password' => 'toto'],
+        'password' => 'toto',
+        'prenom' => 'lolo'],
 
     ['email' => 'Wf3@.com',
-        'password' => 'tutu']
+        'password' => 'tutu',
+        'prenom'=> 'polo']
 ];

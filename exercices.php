@@ -8,7 +8,7 @@ function perimetreCarre($cote){
 }
 function perimetreRectangle($long, $larg){
     $perimetreRectangle =  ($long + $larg) * 2;
-    echo $perimetreRectangle ."<br>"."<p>perimetre du triangle</p>";
+    echo $perimetreRectangle ."<br>"."<p>perimetre du rectangle</p>";
 
 }
 function perimetreCercle($rayon){

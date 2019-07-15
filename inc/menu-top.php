@@ -11,9 +11,17 @@
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.php">Vous Connecter</a>
-          </li>
+          <?php
+          if(!isset($_SESSION["prenom"]) && !isset($_COOKIE["prenom"])){
+             echo'<li class="nav-item">';
+                echo '<a class="nav-link" href="login.php">Vous Connecter</a>';
+                echo '</li>';
+              }else{
+
+
+                
+                echo '<a class="nav-link" href="logout.php">Vous Deconnecter</a>';
+             } ?> 
           <li class="nav-item">
             <a class="nav-link" href="contact.php">Nous contacter</a>
           </li>
