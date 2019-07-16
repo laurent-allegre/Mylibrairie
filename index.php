@@ -1,7 +1,49 @@
 <?php
 session_start();
-  require_once('inc/livres.php');
+
+  //require_once('inc/livres.php');
   require_once('fonctions.php');
+  require_once('inc/my-sql-connect.php');
+  /**
+   * "titre" =>"", 
+   * "auteur" =>"", 
+   * "prix"=> 12.90, 
+   * "genre"=> "", 
+   * "photo"=> "", 
+   * "annee" => "", 
+   * "collection"=> "",
+   * "note" => "4", 
+   * "langue"=> "", 
+   * "nb_pages"=> "288 ", 
+   * "resume"=> "" 
+   */
+  $sql = "SELECT 
+livre.photo as photo,
+livre.prix as prix,
+livre.titre as titre,
+livre.resume as resume,
+livre.note as note,
+livre.nb_pages as nb_pages, 
+
+CONCAT(auteur.prenom , ' ' ,auteur.nom) as auteur,
+collection.nom as collection,
+langue.nom as langue,
+format.nom as nom,
+genre.nom as genre
+FROM livre 
+INNER JOIN auteur ON livre.id_auteur = auteur.id_auteur 
+INNER JOIN collection ON livre.id_collection = collection.id_collection 
+INNER JOIN langue ON livre.id_langue = langue.id_langue 
+INNER JOIN genre ON livre.id_genre = genre.id_genre
+INNER JOIN format ON livre.id_format = format.id_format ";
+$req = $dbh->prepare($sql);
+$req->execute();
+$livres = $req->fetchAll();
+if(count($livres) == 0 ) {
+  echo 'pas de livres !';
+ // die();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +76,7 @@ session_start();
 
 <?php
 if(count($livres) == 0) {
+  
 die("c'est la merde");
 
 } else {

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('inc/livres.php'); 
+//require_once('inc/livres.php'); 
 if(isset($_GET["idlivre"])){
 $id_du_livre = $_GET["idlivre"];
 }else{

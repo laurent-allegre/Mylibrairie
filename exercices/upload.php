@@ -12,7 +12,7 @@ if (isset($_POST["submit"])&&isset($_FILES['picture'])){
 
 
     if(@move_uploaded_file($_FILES['picture']['tmp_name'], $uploadFile)){
-        echo" le fichier a ete telecharger. ";
+        echo" le fichier à été télecharger. ";
     }else{
         echo"il y a eu un probleme <br>";
         print_r($_FILES['picture']['error']);

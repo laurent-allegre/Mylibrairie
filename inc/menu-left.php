@@ -12,7 +12,7 @@
                     $personne = "toi";
                   }
 
-                  echo $personne;
+                 // echo $personne;
                   ?></h1>
                   
           <p>Aujourd'hui nous somme le <?php echo date('d/m/Y'). '<br> et il est '.date('H:i:s') ?></p>
