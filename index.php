@@ -18,6 +18,7 @@ session_start();
    * "resume"=> "" 
    */
   $sql = "SELECT 
+  livre.id_livre as id_livre,
 livre.photo as photo,
 livre.prix as prix,
 livre.titre as titre,
@@ -39,6 +40,7 @@ INNER JOIN format ON livre.id_format = format.id_format ";
 $req = $dbh->prepare($sql);
 $req->execute();
 $livres = $req->fetchAll();
+//var_dump ($livres);
 if(count($livres) == 0 ) {
   echo 'pas de livres !';
  // die();
@@ -80,43 +82,41 @@ if(count($livres) == 0) {
 die("c'est la merde");
 
 } else {
-  foreach ($livres as $key => $value) {
-    echo '<div class="col-lg-4 col-md-6 mb-4">
+  foreach ($livres as $data) {  ?>
+      <div class="col-lg-4 col-md-6 mb-4">
       <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="'.$value["photo"].'" alt=""></a>
+      <img src="<?php echo $data["photo"] ?>" class="card-img-top" alt="..." />
         <div class="card-body">
           <h4 class="card-title text-center">
-            <a href="item.php?idlivre='.$key.'">'.$value["titre"].'</a>
+          <a href="item.php?livre=<?php echo $data["id_livre"] ?>"><?php echo $data["titre"] ?></a>
           </h4>
-          <h5>'.$value["auteur"].'</h5>
-          <p class="">'.$value["resume"].'</p>
-          <h6>'.$value["genre"].'</h6>
-          <h5 class="text-right">'.number_format($value["prix"],2).' €</h5>
-          <p>'.$value["nb_pages"]."pages".'</p>
+          <h5><?php echo $data["auteur"] ?></h5>
+          <p class=""><?=$data["resume"]?></p>
+          <h6><?php echo $data["genre"]?></h6>
+          <h5 class="text-right"><?= number_format($data["prix"],2 ) ?>'€'</h5>
+          <p><?= $data["nb_pages"]."pages" ?></p>
 
         </div>
         <div class="card-footer">
-          <small class="text-muted">';
-
+          <small class="text-muted">
+          <?php
           for($x = 0; $x<=5; $x++){
           
-            if($x <= $value["note"]) {
+            if($x <= $data["note"]) {
             echo "&#9733";
             } else {
             echo "&#9734";
             }
-          }
+          } ?>
           
-          echo '</small>
+          </small>
         </div>
       </div>
-    </div>';
-
+    </div>
+<?php
+  }
 }
-
-
-}
-          ?>
+?>
         </div>
         
       </div>

@@ -1,11 +1,53 @@
 <?php
 session_start();
-//require_once('inc/livres.php'); 
-if(isset($_GET["idlivre"])){
-$id_du_livre = $_GET["idlivre"];
-}else{
-  die("le livre n'existe pas");
-}
+require_once('inc/my-sql-connect.php');
+require_once('fonctions.php');
+
+if(isset($_GET["livre"])){
+  $monLivre = $_GET["livre"];
+  
+  }else{
+    die("le livre n'existe pas");
+  }
+ /**
+   * "titre" =>"", 
+   * "auteur" =>"", 
+   * "prix"=> 12.90, 
+   * "genre"=> "", 
+   * "photo"=> "", 
+   * "annee" => "", 
+   * "collection"=> "",
+   * "note" => "4", 
+   * "langue"=> "", 
+   * "nb_pages"=> "288 ", 
+   * "resume"=> "" 
+   */
+$sql =  "SELECT
+livre.titre AS titre,
+livre.prix AS prix,
+livre.note AS note,
+livre.resume AS resume,
+livre.photo AS photo,
+livre.nb_pages AS  nb_pages,
+concat (COALESCE(auteur.prenom, ''),'  ', auteur.nom) AS auteur,
+collection.nom AS collection,
+langue.nom AS langue,
+genre.nom AS genre
+FROM livre
+LEFT JOIN auteur ON auteur.id_auteur = livre.id_auteur
+LEFT JOIN collection ON collection.id_collection = livre. id_collection
+LEFT JOIN langue ON langue.id_langue = livre.id_langue
+LEFT JOIN genre ON genre.id_genre = livre.id_genre
+WHERE id_livre = :id_livre";
+
+$req = $dbh->prepare($sql);
+$req->bindParam(':id_livre', $monLivre);
+$req->execute();
+$livres = $req->fetch();
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -40,14 +82,14 @@ _  <!-- Custom styles for this template -->
 
 <?php
 echo '<div class="card d-flex flex-row col-9 "style="width:18rem;" >
-            <img class="card-img-top w-50" src="'.$livres[$id_du_livre]["photo"].'" alt="Card image cap">
+            <img class="card-img-top w-50" src="'.$livres["photo"].'" alt="Card image cap">
           <div class="card-body col-6 text-center">
-            <h3 class="card-title">'.$livres[$id_du_livre]["titre"].'</h3>
-            <h5>'.$livres[$id_du_livre]["auteur"].'</h5>
-            <p class="card-text">'.$livres[$id_du_livre]["resume"].'</p>
-            <p class="text-left">'.$livres[$id_du_livre]["nb_pages"]."pages".'</p>
-            <p class="text-left">'.$livres[$id_du_livre]["genre"].'</p>
-            <h6 class="text-right">'.number_format($livres[$id_du_livre]["prix"],2).'€</h6>
+            <h3 class="card-title">'.$livres["titre"].'</h3>
+            <h5>'.$livres["auteur"].'</h5>
+            <p class="card-text">'.$livres["resume"].'</p>
+            <p class="text-left">'.$livres["nb_pages"]."pages".'</p>
+            <p class="text-left">'.$livres["genre"].'</p>
+            <h6 class="text-right">'.number_format($livres["prix"],2).'€</h6>
             <button class="btn btn-dark btn-lg"><span class="fa fa-comment"></span><br>Commentaires</button>
                <button class="btn btn-danger btn-lg"><span class="fa fa-shopping-cart"></span><br>Commander</
         </div>
