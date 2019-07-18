@@ -21,11 +21,13 @@
 
                 
                 echo '<a class="nav-link" href="logout.php">Vous Deconnecter</a>';
+                
+                echo '<a class="nav-link" href="inscription1.php">Mon compte</a>';
              } ?> 
           <li class="nav-item">
             <a class="nav-link" href="contact.php">Nous contacter</a>
           </li>
-          
+         
         </ul>
       </div>
     </div>

@@ -17,15 +17,16 @@ if(isset($_POST["email"]) && $_POST["email"] != ""
      */
     $sql = "SELECT client.id_client, client.email, client.password 
             FROM client 
-            WHERE client.email = :toto
+            WHERE client.email = :email
             AND client.password = :password
             ";
     $req = $dbh->prepare($sql);
-    $req->bindParam(':toto', $_POST["email"]);
+    $req->bindParam(':email', $_POST["email"]);
     $req->bindParam(':password', $_POST["password"]);
     $req->execute();
     $user = $req->fetch(); // Je vérifie les correspondances du mail : utilisateur trouvé
-     if($user != false) {
+     
+    if($user != false) {
          /**
           * Si remember_me est coché, je mets les éléments en cookie
           * Les cookies ont une durée de deux heures
@@ -88,9 +89,7 @@ require_once('inc/menu-top.php');
     // Si j'ai envoyé mon formulaire
     if(isset($_POST["envoyer"])) {
         // Si je suis authentifié.e
-        if($user != false) {
-            echo "<h5>Vous êtes authentifié.e :) </h5>";
-        } else {
+        if(!$user) {
             echo '<div class="alert alert-danger fade show">';
             echo '<ul>';
             foreach($erreurs as $erreur) {
@@ -122,6 +121,12 @@ require_once('inc/menu-top.php');
             <label for="password" class="col-sm-2 col-form-label">Se souvenir</label>
             <div class="col-sm-1">
                 <input type="checkbox" class="form-control" name="remember_me" id="remember_me">
+            </div>
+        </div>
+        <div class="form-group row">
+            
+            <div class="col-sm-1">
+               <a href="inscription1.php">S'inscrire</a>
             </div>
         </div>
 
