@@ -93,7 +93,7 @@ die("c'est la merde");
           <h5><?php echo $data["auteur"] ?></h5>
           <p class=""><?=$data["resume"]?></p>
           <h6><?php echo $data["genre"]?></h6>
-          <h5 class="text-right"><?= number_format($data["prix"],2 ) ?>'€'</h5>
+          <h5 class="text-right"><?= number_format($data["prix"],2 ) ?>&euro;</h5>
           <p><?= $data["nb_pages"]."pages" ?></p>
 
         </div>

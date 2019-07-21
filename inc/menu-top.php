@@ -18,6 +18,17 @@
                 echo '</li>';
               }else{
 
+                    echo '<li class="nav-item">';
+                    echo '<a class="nav-link" href="insert_livre.php">';
+                    echo '+ Livre';
+                    echo '</a>';
+                    echo '</li>';
+                    echo '<li class="nav-item">';
+                    echo '<a class="nav-link" href="insert_auteur.php">';
+                    echo '+ Auteur';
+                    echo '</a>';
+                    echo '</li>';
+
 
                 
                 echo '<a class="nav-link" href="logout.php">Vous Deconnecter</a>';
