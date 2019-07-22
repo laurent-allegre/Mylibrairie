@@ -75,7 +75,7 @@ $langue         = $_POST["langue"] ?? "";
 $format         = $_POST["format"] ?? "";
 $note           = $_POST["note"] ?? "";
 $annee          = $_POST["annee"] ?? "";
-$resume         = $_POST["resume"] ?? "";
+$resume         = htmlspecialchars($_POST["resume"]) ?? "";
 $pages          = $_POST["pages"] ?? "";
 /**
  * Envoi du formulaire

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 18 juil. 2019 à 07:47
+-- Généré le :  lun. 22 juil. 2019 à 21:45
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -34,22 +34,25 @@ CREATE TABLE IF NOT EXISTS `auteur` (
   `nom` varchar(45) NOT NULL,
   `prenom` varchar(45) NOT NULL,
   `bio` mediumtext NOT NULL,
-  `date de naissance` datetime NOT NULL,
+  `date_de_naissance` datetime NOT NULL,
   `photo` varchar(255) NOT NULL,
   PRIMARY KEY (`id_auteur`),
   UNIQUE KEY `id_UNIQUE` (`id_auteur`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `auteur`
 --
 
-INSERT INTO `auteur` (`id_auteur`, `nom`, `prenom`, `bio`, `date de naissance`, `photo`) VALUES
+INSERT INTO `auteur` (`id_auteur`, `nom`, `prenom`, `bio`, `date_de_naissance`, `photo`) VALUES
 (1, 'vernes', 'jules', 'jules vernes', '1750-07-16 00:00:00', '.png'),
 (2, 'zola', 'emile', 'emile zola', '1845-07-23 00:00:00', '.png'),
 (3, 'robillard', 'anne', 'anne robillard', '1967-07-16 00:00:00', '.png'),
 (4, 'Moliere', 'moliere', 'moliere', '1786-12-17 00:00:00', ''),
-(5, 'sarkozy', 'nicolas', 'nicolas sarkozy', '1957-01-17 00:00:00', '.png');
+(5, 'sarkozy', 'nicolas', 'nicolas sarkozy', '1957-01-17 00:00:00', '.png'),
+(6, 'allegre', 'laurent', 'kdeiui op', '2019-07-01 00:00:00', 'image/test.jpg'),
+(7, 'Engels', 'jean', 'spécialisé dans les livres informatiques', '1988-01-03 00:00:00', 'image/no-profile.jpg'),
+(8, 'phillippe', 'B', 'super flic', '1986-09-06 00:00:00', 'image/no-profile.jpg');
 
 -- --------------------------------------------------------
 
@@ -63,22 +66,27 @@ CREATE TABLE IF NOT EXISTS `client` (
   `nom` varchar(45) NOT NULL,
   `prenom` varchar(45) NOT NULL,
   `adresse` varchar(255) NOT NULL,
-  `code postal` int(11) NOT NULL,
-  `villes` varchar(45) NOT NULL,
+  `code_postal` int(11) NOT NULL,
+  `ville` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`id_client`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `client`
 --
 
-INSERT INTO `client` (`id_client`, `nom`, `prenom`, `adresse`, `code postal`, `villes`, `email`, `password`) VALUES
-(3, 'Allegre', 'laurent', '78 allée de la résistance', 84170, 'monteux', 'laurent.allegre@dbmail.com', '4847xn72'),
+INSERT INTO `client` (`id_client`, `nom`, `prenom`, `adresse`, `code_postal`, `ville`, `email`, `password`) VALUES
+(3, 'maccione', 'aldo', 'champs elysee', 75200, 'tartenpion', 'aldo@dbmail.com', '147852'),
 (4, 'Dauba', 'benoit', 'route d\'avignon', 84172, 'entraigues', 'benoit.dauba@webforce-code.fr', '123456'),
-(5, 'poche', 'jules', '78 allée de la résistance', 84210, 'monteux', 'lolo@com', '123456');
+(6, 'Loursac', 'guilhem', 'rue de la republique', 84200, 'carpentras', 'loursac.guilhem@gmail.com', '789456'),
+(9, 'allegre', 'roger', '80 allee de la resistance', 84170, 'MONTEUX', 'roger@aol.com', '456123'),
+(12, 'Astor', 'joseph', 'montée du couchadou', 84210, 'pernes les fontaines', 'na2si@hotmail.fr', '7777'),
+(13, 'allegre', 'laurent', '78allee de la resistance', 84170, 'MONTEUX-centre', 'laurent.allegre@dbmail.com', '111111'),
+(14, 'Sirvent', 'ludovic', 'rue porte de monteux', 84500, 'mazan', 'ludovic.sirvent@orange.fr', '951753'),
+(15, 'allegre', 'danielle', 'residence topia', 84200, 'carpentras', 'danielle@aol.com', '2541');
 
 -- --------------------------------------------------------
 
@@ -91,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `collection` (
   `id_collection` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_collection`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `collection`
@@ -99,7 +107,8 @@ CREATE TABLE IF NOT EXISTS `collection` (
 
 INSERT INTO `collection` (`id_collection`, `nom`) VALUES
 (4, 'gallimard'),
-(5, 'hachette');
+(5, 'hachette'),
+(6, 'Eyrolles');
 
 -- --------------------------------------------------------
 
@@ -152,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `genre` (
   `id_genre` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_genre`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `genre`
@@ -162,7 +171,8 @@ INSERT INTO `genre` (`id_genre`, `nom`) VALUES
 (1, 'littéraire'),
 (2, 'fantastic'),
 (3, 'aventure'),
-(4, 'littérature');
+(4, 'littérature'),
+(5, 'cours');
 
 -- --------------------------------------------------------
 
@@ -193,14 +203,23 @@ INSERT INTO `langue` (`id_langue`, `nom`) VALUES
 
 DROP TABLE IF EXISTS `ligne_panier`;
 CREATE TABLE IF NOT EXISTS `ligne_panier` (
-  `id_ligne_panier` int(11) NOT NULL AUTO_INCREMENT,
+  `id_lignepanier` int(11) NOT NULL AUTO_INCREMENT,
   `id_livre` int(11) NOT NULL,
   `quantite` int(11) NOT NULL,
   `id_panier` int(11) NOT NULL,
-  PRIMARY KEY (`id_ligne_panier`),
+  PRIMARY KEY (`id_lignepanier`),
   KEY `fk_ligne_panier_livre1_idx` (`id_livre`),
   KEY `fk_ligne_panier_panier1_idx` (`id_panier`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `ligne_panier`
+--
+
+INSERT INTO `ligne_panier` (`id_lignepanier`, `id_livre`, `quantite`, `id_panier`) VALUES
+(3, 10, 1, 1),
+(4, 15, 1, 1),
+(5, 18, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -229,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `livre` (
   KEY `fk_livre_format1_idx` (`id_format`),
   KEY `fk_livre_langue1_idx` (`id_langue`),
   KEY `fk_livre_genre1_idx` (`id_genre`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `livre`
@@ -246,10 +265,14 @@ INSERT INTO `livre` (`id_livre`, `titre`, `prix`, `note`, `nb_pages`, `annee`, `
 (8, 'les chevaliers d\'emeraude tome 2', '12.90', '5.60', 320, 2002, 'image/chevalier-2.jpg', 3, 4, 2, 1, 2, 'Après des siècles de paix, les armées de l\'Empereur Noir Amecareth envahissent soudain les royaumes du continent d\'Enkidiev. Les Chevaliers d\'Emeraude doivent alors protéger Kira, l\'enfant magique...'),
 (9, 'les chevaliers d\'emeraude tome 3', '12.90', '5.20', 325, 2003, 'image/chevalier-3.jpg', 3, 4, 2, 1, 2, 'Après des siècles de paix, les armées de l\'Empereur Noir Amecareth envahissent soudain les royaumes du continent d\'Enkidiev. Les Chevaliers d\'Émeraude doivent alors protéger Kira, l\'enfant magique '),
 (10, 'le malade imaginaire', '14.50', '4.60', 255, 1980, 'image/malade-imaginaire.jpg', 4, 5, 1, 1, 4, 'Angélique et Cléante se sont promis l\'un à l\'autre... Argan, père autoritaire, en a décidé autrement : sa fille Angélique épousera un médecin'),
-(11, 'les fourberies de scapin ', '7.90', '3.00', 129, 1984, 'image/fourberie.jpg', 4, 4, 3, 1, 4, ''),
+(11, 'les fourberies de scapin ', '7.90', '3.00', 129, 1984, 'image/fourberie.jpg', 4, 4, 3, 1, 4, 'Scapin, le valet italien, est fourbe. Il est menteur, voleur, hypocrite et perfide. Mais, à sa façon, il est aussi fidèle et courageux. Il lutte en permanence contre les injustices de son temps...'),
 (12, 'les chevaliers d\'emeraude tome 4', '12.90', '5.60', 326, 2005, 'image/chevalier-4.jpg', 3, 4, 2, 1, 2, 'Après des siècles de paix, les armées de l\'Empereur Noir Amecareth envahissent soudain les royaumes du continent d\'Enkidiev. Les Chevaliers d\'Émeraude doivent alors protéger Kira'),
-(13, 'le bourgeois gentilhomme', '14.75', '3.25', 266, 1999, 'image/bourgeois.jpg', 4, 5, 1, 2, 4, ''),
-(14, 'l\'ile mystérieuse', '15.99', '4.20', 290, 1995, 'image/ile-mysterieuse.jpg', 1, 5, 3, 1, 3, '');
+(13, 'le bourgeois gentilhomme', '14.75', '3.25', 266, 1999, 'image/bourgeois.jpg', 4, 5, 1, 2, 4, 'Infortuné Monsieur Jourdain, égaré par son absurde vanité, sa prétention, son snobisme dévorant. Moqué, berné, il s\'est livré à ses maîtres d\'armes'),
+(14, 'l\'ile mystérieuse', '15.99', '4.20', 290, 1995, 'image/ile-mysterieuse.jpg', 1, 5, 3, 1, 3, 'Une île déserte, en plein océan Pacifique. Cinq naufragés américains organisent leur survie, accompagnés de leur chien Top...'),
+(15, 'PHP 7: Cours et exercices', '29.90', '5.00', 586, 2017, 'image/php7.jpg', 7, 6, 2, 1, 5, 'Ce manuel d\'initiation vous conduira des premiers pas en PHP jusqu\'à la réalisation d\'un site Web dynamique complet interagissant avec une base de données MySQL ou SQLite .'),
+(16, 'Votre première base de données avec MySQL', '13.50', '4.00', 195, 2011, 'image/Mysql.jpg', 7, 6, 3, 1, 5, 'si vous voulez construire un site réellement dynamique, capable d\'afficher à la volée des pages personnalisées à la demande de vos visiteurs, si vous souhaitez mettre votre catalogue de produit en ligne ...'),
+(17, 'HTML5 et CSS3 - Maîtrisez les standards de la création de sites web', '29.90', '5.00', 288, 2017, 'image/html.jpg', 7, 6, 2, 1, 5, 'Ce livre sur le langage HTML5 (en version 5.2 au moment de l\'écriture) et les feuilles de styles CSS3, langages fondateurs dans la création de sites web, s\'adresse aux développeurs qui souhaitent disposer des connaissances...'),
+(18, 'GIGN : confessions d\'un OPS', '21.00', '5.00', 528, 2017, 'image/gign.jpg', 8, 4, 3, 1, 3, 'Philippe B. n\'aurait jamais du se trouver à la place qui fut si souvent la sienne durant ces quinze dernières années : en tête d\'une colonne d\'assaut du GIGN ! Élevé à la dure, son aptitude aux arts martiaux ');
 
 -- --------------------------------------------------------
 
@@ -265,7 +288,14 @@ CREATE TABLE IF NOT EXISTS `panier` (
   `date_modification` datetime NOT NULL,
   PRIMARY KEY (`id_panier`),
   KEY `fk_panier_client1_idx` (`id_client`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `panier`
+--
+
+INSERT INTO `panier` (`id_panier`, `id_client`, `date_creation`, `date_modification`) VALUES
+(1, 13, '2019-07-22 09:12:47', '2019-07-22 09:41:09');
 
 --
 -- Contraintes pour les tables déchargées

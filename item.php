@@ -91,7 +91,14 @@ $livre = $req->fetch();
                                 }
                              ?></span>
                             <?= $livre["note"] ?> étoiles <br /><br />
-                            <a href="#" class="btn btn-success">Acheter</a>
+                            <?php
+                            if(isset($_SESSION["id_client"]) || isset($_COOKIE["id_client"])) {
+                                ?>
+                                <a href="panier.php?livre=<?= $monLivre ?>" class="btn btn-success">Acheter</a>
+                                <?php
+                            }
+                            ?>
+                        
                         </div>
                     </div>
                 </div>

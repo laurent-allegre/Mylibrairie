@@ -18,6 +18,11 @@
                 echo '</li>';
               }else{
 
+                echo '<li class="nav-item">';
+                echo '<a class="nav-link" href="panier.php">';
+                echo 'panier';
+                echo '</a>';
+                echo '</li>';
                     echo '<li class="nav-item">';
                     echo '<a class="nav-link" href="insert_livre.php">';
                     echo '+ Livre';
